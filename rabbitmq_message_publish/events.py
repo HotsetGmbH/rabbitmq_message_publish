@@ -4,8 +4,11 @@ import json
 import uuid
 import socket
 import datetime
+import frappe
 
 def doctype_changed(doc, event):
+        settings = frappe.get_doc('RabbitMQ Settings','dev100')
+
         global_id = doc.name
         if hasattr(doc,'global_id'):
                 global_id = doc.global_id
@@ -13,7 +16,7 @@ def doctype_changed(doc, event):
         payload = {}
         payload['transaction_id'] = str(uuid.uuid4())
         payload['system'] = 'erpnext'
-        payload['datapool'] = '' #TODO: Konfigurierbar
+        payload['datapool'] = settings.datapool
         payload['language'] = '' #TODO:  -> externen fragen
         payload['hostname'] = socket.gethostname().upper()
         payload['user'] = doc.modified_by
@@ -27,7 +30,7 @@ def doctype_changed(doc, event):
 
         body = {}
         body['properties'] = {}
-        body['routing_key'] = f"erpnext.*.{doc.doctype}"
+        body['routing_key'] = f"erpnext.{settings.datapool}.{doc.doctype}"
         #ensure_ascii=false -> for formatting special characters correctly
         #indent=4 -> beautifies json in message
         #default=str -> enables converting of complex objects to string
@@ -36,6 +39,8 @@ def doctype_changed(doc, event):
         body_json = json.loads(json.dumps(body,ensure_ascii=False,indent=4))
 
         session = requests.Session()
-        session.auth = ('Penta-CRM-Interface (DEV)','aoFDfdE3')#TODO: Aus Konfiguration lesesn
 
-        response = session.post('http://rabbitmq.hotsetgmbh.de:15672/api/exchanges/%2F/dev.psipenta.tx/publish', json=body_json ) #TODO: Aus Konfiguration lesesn
+        session.auth = (settings.username, settings.password)#TODO: Passwort decrypten
+
+        response = session.post(settings.url, json=body_json )
+        response = response
