@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include rabbitmq_message_publish *.css
+recursive-include rabbitmq_message_publish *.csv
+recursive-include rabbitmq_message_publish *.html
+recursive-include rabbitmq_message_publish *.ico
+recursive-include rabbitmq_message_publish *.js
+recursive-include rabbitmq_message_publish *.json
+recursive-include rabbitmq_message_publish *.md
+recursive-include rabbitmq_message_publish *.png
+recursive-include rabbitmq_message_publish *.py
+recursive-include rabbitmq_message_publish *.svg
+recursive-include rabbitmq_message_publish *.txt
+recursive-exclude rabbitmq_message_publish *.pyc
