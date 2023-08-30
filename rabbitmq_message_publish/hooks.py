@@ -116,15 +116,16 @@ app_license = "-"
 
 # Document Events
 # ---------------
-# Hook on document methods and events
+# Hook on document methods and events, for available methods see: https://frappeframework.com/docs/user/en/guides/app-development/executing-code-on-doctype-events
 
-# doc_events = {
-#	"*": {
-#		"on_update": "method",
-#		"on_cancel": "method",
-#		"on_trash": "method"
-#	}
-# }
+doc_events = {
+	("User","Item"):
+	{ 
+		"on_trash":"rabbitmq_message_publish.events.doctype_changed",
+		"on_update":"rabbitmq_message_publish.events.doctype_changed"
+	}
+}
+
 
 # Scheduled Tasks
 # ---------------
