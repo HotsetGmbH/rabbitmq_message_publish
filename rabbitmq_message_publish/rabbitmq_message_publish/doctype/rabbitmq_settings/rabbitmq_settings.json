@@ -1,0 +1,75 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-08-31 08:17:21.361492",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "url",
+  "username",
+  "password",
+  "datapool_name",
+  "datapool_id"
+ ],
+ "fields": [
+  {
+   "fieldname": "url",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "RabbitMQ Exchange Url",
+   "reqd": 1
+  },
+  {
+   "fieldname": "username",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "RabbitMQ User Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "password",
+   "fieldtype": "Password",
+   "in_list_view": 1,
+   "label": "RabbitMQ User Password",
+   "reqd": 1
+  },
+  {
+   "fieldname": "datapool_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Datapool Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "datapool_id",
+   "fieldtype": "Data",
+   "label": "Datapool Id",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2023-08-31 09:45:15.965045",
+ "modified_by": "Administrator",
+ "module": "RabbitMQ Message Publish",
+ "name": "RabbitMQ Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
