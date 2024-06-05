@@ -7,7 +7,22 @@ from rabbitmq_message_publish.events import log_to_kibana  # Importiere die Meth
 
 @frappe.whitelist()
 def send_test_message():
-	log_to_kibana("info", "RabbitMQ settings are configured correctly.")
+	try:
+		log_to_kibana("info", "RabbitMQ settings are configured correctly.")
+
+		return {
+            "status": "success",
+            "message": "Test message sent successfully."
+        }
+	
+	except Exception as e:
+
+		return {
+			"status": "error",
+			"message": str(e)
+		}
+
+
 class RabbitMQSettings(Document):
 	pass
 

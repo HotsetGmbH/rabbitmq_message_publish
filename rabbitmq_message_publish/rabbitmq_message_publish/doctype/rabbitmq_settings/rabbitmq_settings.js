@@ -9,9 +9,7 @@ frappe.ui.form.on('RabbitMQ Settings', {
                 args: {
                 },
                 callback: function(r) {
-                    if (r.message) {
-                        frappe.msgprint(__('Testmessage sent successfully.'));
-                    }
+                    frappe.msgprint(r.message);
                 }
             });
         });

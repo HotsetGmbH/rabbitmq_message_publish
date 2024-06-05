@@ -28,16 +28,13 @@ def prepare_message_header (settings,user,event):
         }
 
 def send_message (settings, exchange, message):
-        try:
 
-                url = settings.url + "/api/exchanges/" +  settings.virtual_host + "/" + exchange + "/publish"
+        url = settings.url + "/api/exchanges/" +  settings.virtual_host + "/" + exchange + "/publish"
+        response = requests.post(url, auth=(settings.username, settings.get_password("password")), json=message)
 
-                response = requests.post(url, auth=(settings.username, settings.get_password("password")), json=message)
-                if response.status_code != 200:
-                        raise Exception (f"Failed to send log entry: {response.status_code} {response.text}")
+        if response.status_code != 200:
+                raise Exception (f"Failed to send log entry: {response.status_code} {response.text}")
 
-        except Exception as err:
-                print(f'An unexpected error occurred: {err}')
 
 def log_to_kibana(loglevel, message, offset = 0):
         """
