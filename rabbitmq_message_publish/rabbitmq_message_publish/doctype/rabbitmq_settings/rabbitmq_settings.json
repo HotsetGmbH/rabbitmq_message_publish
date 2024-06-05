@@ -8,17 +8,22 @@
  "engine": "InnoDB",
  "field_order": [
   "url",
+  "virtual_host",
   "username",
   "password",
+  "column_break_wgvn",
   "datapool_name",
-  "datapool_id"
+  "datapool_id",
+  "message_exchange",
+  "logging_queue"
  ],
  "fields": [
   {
+   "default": "http://rabbitmq:15672",
    "fieldname": "url",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "RabbitMQ Exchange Url",
+   "label": "RabbitMQ API Url",
    "reqd": 1
   },
   {
@@ -36,6 +41,7 @@
    "reqd": 1
   },
   {
+   "description": "Datapool name for logging",
    "fieldname": "datapool_name",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -43,16 +49,40 @@
    "reqd": 1
   },
   {
+   "description": "ID of datapool for routing keys: <code>erpnext.{datapool_id}.{doctype}</code>",
    "fieldname": "datapool_id",
    "fieldtype": "Data",
    "label": "Datapool Id",
    "reqd": 1
+  },
+  {
+   "default": "%2F",
+   "fieldname": "virtual_host",
+   "fieldtype": "Data",
+   "label": "Virtual host"
+  },
+  {
+   "fieldname": "column_break_wgvn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "dev.erpnext.tx",
+   "fieldname": "message_exchange",
+   "fieldtype": "Data",
+   "label": "Message Exchange"
+  },
+  {
+   "default": "dev.logging.q",
+   "description": "Queue for logging messages (<code>operation = \"logging\"</code>)",
+   "fieldname": "logging_queue",
+   "fieldtype": "Data",
+   "label": "Logging queue"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-08-31 09:45:15.965045",
+ "modified": "2024-06-05 12:26:07.349292",
  "modified_by": "Administrator",
  "module": "RabbitMQ Message Publish",
  "name": "RabbitMQ Settings",

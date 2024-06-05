@@ -2,7 +2,18 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('RabbitMQ Settings', {
-	// refresh: function(frm) {
-
-	// }
+    refresh: function(frm) {
+        frm.add_custom_button(__('Send Test Message'), function() {
+            frappe.call({
+                method: 'rabbitmq_message_publish.rabbitmq_message_publish.doctype.rabbitmq_settings.rabbitmq_settings.send_test_message',
+                args: {
+                },
+                callback: function(r) {
+                    if (r.message) {
+                        frappe.msgprint(__('Testmessage sent successfully.'));
+                    }
+                }
+            });
+        });
+    }
 });
