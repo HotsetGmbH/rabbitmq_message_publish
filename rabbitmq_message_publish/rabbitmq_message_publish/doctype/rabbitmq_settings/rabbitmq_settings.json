@@ -7,14 +7,19 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "section_break_ixjw",
+  "message_broker_details_column",
   "url",
   "virtual_host",
   "username",
   "password",
-  "column_break_wgvn",
-  "datapool_name",
-  "datapool_id",
+  "message_routing_column",
   "message_exchange",
+  "system_id",
+  "datapool_id",
+  "column_break_wgvn",
+  "system",
+  "datapool_name",
   "logging_queue"
  ],
  "fields": [
@@ -49,7 +54,7 @@
    "reqd": 1
   },
   {
-   "description": "ID of datapool for routing keys: <code>erpnext.{datapool_id}.{doctype}</code>",
+   "description": "ID of datapool for routing keys<br><code>{system_id}.{datapool_id}.{doctype}</code>",
    "fieldname": "datapool_id",
    "fieldtype": "Data",
    "label": "Datapool Id",
@@ -63,7 +68,8 @@
   },
   {
    "fieldname": "column_break_wgvn",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "label": "Logging"
   },
   {
    "default": "dev.erpnext.tx",
@@ -73,16 +79,44 @@
   },
   {
    "default": "dev.logging.q",
-   "description": "Queue for logging messages (<code>operation = \"logging\"</code>)",
+   "description": "Queue for logging messages<br>(<code>operation = \"logging\"</code>)",
    "fieldname": "logging_queue",
    "fieldtype": "Data",
    "label": "Logging queue"
+  },
+  {
+   "default": "erpnext",
+   "description": "System name for logging",
+   "fieldname": "system",
+   "fieldtype": "Data",
+   "label": "System"
+  },
+  {
+   "fieldname": "message_routing_column",
+   "fieldtype": "Column Break",
+   "label": "Message Routing"
+  },
+  {
+   "default": "erpnext",
+   "description": "System ID for routing keys<br><code>{system_id}.{datapool_id}.{doctype}</code>",
+   "fieldname": "system_id",
+   "fieldtype": "Data",
+   "label": "System Id"
+  },
+  {
+   "fieldname": "section_break_ixjw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "message_broker_details_column",
+   "fieldtype": "Column Break",
+   "label": "Message Broker Details"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-06-05 12:26:07.349292",
+ "modified": "2024-06-05 13:58:18.583741",
  "modified_by": "Administrator",
  "module": "RabbitMQ Message Publish",
  "name": "RabbitMQ Settings",
