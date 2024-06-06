@@ -61,7 +61,7 @@
    "reqd": 1
   },
   {
-   "default": "%2F",
+   "default": "/",
    "fieldname": "virtual_host",
    "fieldtype": "Data",
    "label": "Virtual host"

@@ -5,6 +5,7 @@ import socket
 from datetime import datetime, timezone
 import inspect
 import frappe
+import urllib.parse
 
 def prepare_message_header (settings,user,event):
         language = frappe.session.data.lang
@@ -27,9 +28,16 @@ def prepare_message_header (settings,user,event):
                 "user": user
         }
 
-def send_message (settings, exchange, message):
+def send_message (settings, message):
 
-        url = settings.url + "/api/exchanges/" +  settings.virtual_host + "/" + exchange + "/publish"
+        virtual_host = urllib.parse.quote(settings.virtual_host,safe='')
+        if message['routing_key'] == settings.logging_queue:
+                # logging messages always go to default exchange
+                exchange = ""
+        else:
+                exchange = settings.message_exchange
+
+        url = settings.url + "/api/exchanges/" +  virtual_host + "/" + exchange + "/publish"
         response = requests.post(url, auth=(settings.username, settings.get_password("password")), json=message)
 
         if response.status_code != 200:
@@ -67,7 +75,7 @@ def log_to_kibana(loglevel, message, offset = 0):
         body['payload'] = json.dumps(payload,ensure_ascii=False,indent=4,default=str)
         body['payload_encoding'] = "string"
 
-        send_message(settings,"",json.loads(json.dumps(body,ensure_ascii=False,indent=4)))  
+        send_message(settings,json.loads(json.dumps(body,ensure_ascii=False,indent=4)))  
        
 
 def doctype_changed(doc, event):
@@ -97,4 +105,4 @@ def doctype_changed(doc, event):
         body['payload_encoding'] = "string"
         body_json = json.loads(json.dumps(body,ensure_ascii=False,indent=4))
 
-        send_message(settings,settings.message_exchange,body_json)
+        send_message(settings,body_json)
