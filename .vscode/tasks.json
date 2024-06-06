@@ -1,0 +1,104 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "markdownlint",
+			"problemMatcher": [
+				"$markdownlint"
+			],
+            "options": {
+                "cwd": "${workspaceFolder}\\docfx"
+            },            
+			"label": "markdownlint: Lint all Markdown files in the workspace with markdownlint",            
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			}
+		},
+        {
+            "label": "docfx build --serve",
+            "type": "shell",
+            "command": "docfx",
+            "args": [
+                "build",
+				"--serve",
+				"${workspaceFolder}\\docfx\\docfx.json"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "doclanguagetranslator - auto translate missing documents",
+            "type": "shell",
+            "command": "doclanguagetranslator",
+            "args": [
+                "-d", "${workspaceFolder}\\docfx\\docs",
+				"-k", "2e6093b13bf84fe4b7a2f7153e3910e6"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "doclinkchecker",
+            "type": "shell",
+            "command": "doclinkchecker",
+            "args": [
+				"-a","-t","-x",
+                "-d", "${workspaceFolder}\\docfx\\docs"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "docfxtocgenerator (de)",
+            "type": "shell",
+            "command": "docfxtocgenerator",
+            "args": [
+				"-s",
+                "-d", "${workspaceFolder}\\docfx\\docs\\de"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "docfxtocgenerator (en)",
+            "type": "shell",
+            "command": "docfxtocgenerator",
+            "args": [
+				"-s",
+                "-d", "${workspaceFolder}\\docfx\\docs\\en"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "translate DE->EN",
+            "type": "shell",
+            "command": "python",
+            "args": [
+                "${workspaceFolder}\\docfx\\scripts\\translate.py",
+                "${workspaceFolder}\\docfx\\docs\\de",
+                "${workspaceFolder}\\docfx\\docs\\en"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        }
+	]
+}

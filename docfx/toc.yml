@@ -1,0 +1,5 @@
+items:
+- name: "Deutsch (🇩🇪)"
+  href: docs/de/
+- name: "Englisch (🇬🇧)"
+  href: docs/en/

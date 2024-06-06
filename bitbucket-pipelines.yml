@@ -9,3 +9,15 @@ pipelines:
           - git clone --bare git@bitbucket.org:hotset/rabbitmq_message_publish.git
           - cd rabbitmq_message_publish.git
           - git push --mirror git@github.com:HotsetGmbH/rabbitmq_message_publish.git
+    - step:
+          runs-on:
+            - self.hosted
+            - linux.shell
+            - docfx
+          name: update documentation site
+          clone:
+            enabled: true
+          script:
+            - /opt/docfx/docfx build docfx/docfx.json
+            - rm -rf /var/www/html/erp
+            - cp -a docfx/_site /var/www/html/rabbitmq_message_publish

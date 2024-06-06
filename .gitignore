@@ -5,3 +5,5 @@
 tags
 rabbitmq_message_publish/docs/current
 node_modules/
+docfx/_site/
+docfx/obj/

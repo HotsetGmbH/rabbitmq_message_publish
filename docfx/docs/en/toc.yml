@@ -1,0 +1,7 @@
+items:
+- name: RabbitMQ Message Publish
+  href: Index.md
+- name: RabbitMQ Settings
+  href: RabbitMqSettings.md
+- name: Content and Structure of Messages
+  href: MessageStructure.md
