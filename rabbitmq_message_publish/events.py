@@ -38,7 +38,12 @@ def send_message (settings, message):
                 exchange = settings.message_exchange
 
         url = settings.url + "/api/exchanges/" +  virtual_host + "/" + exchange + "/publish"
-        response = requests.post(url, auth=(settings.username, settings.get_password("password")), json=message)
+        if settings.dont_check_ssl_certificates:
+                response = requests.post(url, auth=(settings.username, settings.get_password("password")), 
+                                         json=message, verify=False)
+        else:
+                response = requests.post(url, auth=(settings.username, settings.get_password("password")), 
+                                         json=message)
 
         if response.status_code != 200:
                 raise Exception (f"Failed to send log entry: {response.status_code} {response.text}")
@@ -80,6 +85,9 @@ def log_to_kibana(loglevel, message, offset = 0):
 
 def doctype_changed(doc, event):
         settings = frappe.get_single('RabbitMQ Settings')
+        if settings.disabled:
+                return
+
         if not settings.get_password:
              raise Exception ("RabbitMQ Settings missing!") 
 

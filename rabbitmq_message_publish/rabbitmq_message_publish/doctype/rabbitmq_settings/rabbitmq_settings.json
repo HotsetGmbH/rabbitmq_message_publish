@@ -20,7 +20,11 @@
   "column_break_wgvn",
   "system",
   "datapool_name",
-  "logging_queue"
+  "logging_queue",
+  "settings_section",
+  "disabled",
+  "column_break_brhn",
+  "dont_check_ssl_certificates"
  ],
  "fields": [
   {
@@ -111,12 +115,35 @@
    "fieldname": "message_broker_details_column",
    "fieldtype": "Column Break",
    "label": "Message Broker Details"
+  },
+  {
+   "fieldname": "settings_section",
+   "fieldtype": "Section Break",
+   "label": "Settings"
+  },
+  {
+   "default": "0",
+   "description": "Do not send any messages on Doctype changes.",
+   "fieldname": "disabled",
+   "fieldtype": "Check",
+   "label": "Disabled"
+  },
+  {
+   "fieldname": "column_break_brhn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "description": "Ignore validity of SSL certificates for communication with message broker. <p><b>Attention:</b> This is not recommended for production systems.</p>",
+   "fieldname": "dont_check_ssl_certificates",
+   "fieldtype": "Check",
+   "label": "Don't check SSL certificates"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-06-05 13:58:18.583741",
+ "modified": "2024-10-18 10:58:24.079123",
  "modified_by": "Administrator",
  "module": "RabbitMQ Message Publish",
  "name": "RabbitMQ Settings",
