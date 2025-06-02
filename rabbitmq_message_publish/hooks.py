@@ -118,8 +118,18 @@ app_license = "-"
 # ---------------
 # Hook on document methods and events, for available methods see: https://frappeframework.com/docs/user/en/guides/app-development/executing-code-on-doctype-events
 
+#doc_events = {
+#	("Customer","Address","Sales Order"):
+#	{ 
+#		"on_update":"rabbitmq_message_publish.events.doctype_changed",
+#		"on_submit":"rabbitmq_message_publish.events.doctype_changed",
+#		"on_cancel":"rabbitmq_message_publish.events.doctype_changed",
+#		"on_trash":"rabbitmq_message_publish.events.doctype_changed"
+#	}
+#}
+
 doc_events = {
-	("Customer","Address","Sales Order"):
+	("Penta Job Card"):
 	{ 
 		"on_update":"rabbitmq_message_publish.events.doctype_changed",
 		"on_submit":"rabbitmq_message_publish.events.doctype_changed",
@@ -127,7 +137,6 @@ doc_events = {
 		"on_trash":"rabbitmq_message_publish.events.doctype_changed"
 	}
 }
-
 
 # Scheduled Tasks
 # ---------------
