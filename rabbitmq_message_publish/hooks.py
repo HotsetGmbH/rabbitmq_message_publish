@@ -135,6 +135,13 @@ doc_events = {
 		"on_submit":"rabbitmq_message_publish.events.doctype_changed",
 		"on_cancel":"rabbitmq_message_publish.events.doctype_changed",
 		"on_trash":"rabbitmq_message_publish.events.doctype_changed"
+	},
+	("Customer"):
+	{
+		"on_update":"rabbitmq_message_publish.events.doctype_changed",
+		"on_submit":"rabbitmq_message_publish.events.doctype_changed",
+		"on_cancel":"rabbitmq_message_publish.events.doctype_changed",
+		"on_trash":"rabbitmq_message_publish.events.doctype_changed"
 	}
 }
 
