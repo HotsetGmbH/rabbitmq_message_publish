@@ -118,16 +118,6 @@ app_license = "-"
 # ---------------
 # Hook on document methods and events, for available methods see: https://frappeframework.com/docs/user/en/guides/app-development/executing-code-on-doctype-events
 
-#doc_events = {
-#	("Customer","Address","Sales Order"):
-#	{ 
-#		"on_update":"rabbitmq_message_publish.events.doctype_changed",
-#		"on_submit":"rabbitmq_message_publish.events.doctype_changed",
-#		"on_cancel":"rabbitmq_message_publish.events.doctype_changed",
-#		"on_trash":"rabbitmq_message_publish.events.doctype_changed"
-#	}
-#}
-
 doc_events = {
 	("Penta Job Card"):
 	{ 
@@ -136,12 +126,20 @@ doc_events = {
 		"on_cancel":"rabbitmq_message_publish.events.doctype_changed",
 		"on_trash":"rabbitmq_message_publish.events.doctype_changed"
 	},
-	("Customer"):
+	("Customer","Address"):
 	{
 		"on_update":"rabbitmq_message_publish.events.doctype_changed",
 		"on_submit":"rabbitmq_message_publish.events.doctype_changed",
 		"on_cancel":"rabbitmq_message_publish.events.doctype_changed",
 		"on_trash":"rabbitmq_message_publish.events.doctype_changed"
+	}
+	("Sales Order"):
+	{
+		"on_update":"rabbitmq_message_publish.events.doctype_changed",
+		"on_submit":"rabbitmq_message_publish.events.doctype_changed",
+		"on_cancel":"rabbitmq_message_publish.events.doctype_changed",
+		"on_trash":"rabbitmq_message_publish.events.doctype_changed",
+		"on_update_after_submit":"rabbitmq_message_publish.events.doctype_changed"
 	}
 }
 
