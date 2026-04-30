@@ -82,7 +82,7 @@ def log_to_kibana(loglevel, message, offset = 0):
 
         send_message(settings,json.loads(json.dumps(body,ensure_ascii=False,indent=4)))  
        
-
+@frappe.whitelist()
 def doctype_changed(doc, event):
         settings = frappe.get_single('RabbitMQ Settings')
         if settings.disabled:
