@@ -82,7 +82,6 @@ def log_to_kibana(loglevel, message, offset = 0):
 
         send_message(settings,json.loads(json.dumps(body,ensure_ascii=False,indent=4)))  
        
-@frappe.whitelist()
 def doctype_changed(doc, event):
         settings = frappe.get_single('RabbitMQ Settings')
         if settings.disabled:
@@ -114,3 +113,8 @@ def doctype_changed(doc, event):
         body_json = json.loads(json.dumps(body,ensure_ascii=False,indent=4))
 
         send_message(settings,body_json)
+
+@frappe.whitelist()
+def publish_doctype_event(doctype, name, event):
+        doc = frappe.get_doc(doctype, name)
+        return doctype_changed(doc, event)
